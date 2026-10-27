@@ -198,6 +198,45 @@ Google Colab does not automatically schedule a notebook to run daily simply beca
 - Add error handling, data validation, and alerts when an API download fails.
 - Refine date matching to handle US and ECB holidays explicitly.
 
+## 11. Power BI Dashboard
+
+The project includes a Power BI dashboard built on the processed US–EUR yield dataset. The report provides an interactive view of yield differentials, weekly changes, and rule-based EUR/USD signals for the 2-year (2Y) and 10-year (10Y) maturities.
+
+### Dashboard Features
+
+The Power BI report includes:
+
+- **Latest KPI Cards:** Display the latest 2Y and 10Y yield differentials and their respective one-week changes.
+- **Trading Signal Cards:** Show the latest rule-based EUR/USD signals for the 2Y and 10Y maturities.
+- **Yield Differential Chart:** Compare historical US–EUR yield differentials for both maturities.
+- **Weekly Change Chart:** Visualize changes in the yield differentials over the five-business-day lookback period, including the signal thresholds.
+- **Daily Momentum Comparison:** Compare 2Y and 10Y changes using a clustered column chart.
+- **Interactive Filters:** Explore historical data using the date range slicer and signal filters.
+
+### Refreshing the Dashboard
+
+The report can be refreshed to retrieve updated data and display the latest available observations.
+
+To refresh the report using Python scripting in Power BI Desktop:
+
+1. Install Python on your computer.
+2. Configure the Python installation in Power BI Desktop under **File → Options and settings → Options → Python scripting**.
+3. Ensure that Power BI is configured to use the Python environment containing the required libraries, including `pandas`, `numpy`, `requests`, `ustreasurycurve`, and `pyarrow`, as required by the data retrieval script.
+4. Ensure that the Python script used by the Power BI data source retrieves data dynamically up to the current date rather than using a fixed historical end date.
+5. Open the Power BI report and select **Home → Refresh**.
+
+If Python scripting is configured correctly and the required libraries are installed in the Python environment selected by Power BI, refreshing the report will rerun the relevant data retrieval and processing steps and update the dashboard with the latest available data.
+
+**Important considerations:**
+
+- The latest available observation may not correspond to the current calendar date because of weekends, public holidays, or source publication schedules.
+- Installing Python libraries in a different environment from the one configured in Power BI may cause refresh errors.
+- If the report uses a separate CSV or Excel file as its data source, that file must also be updated by the data retrieval workflow before the report is refreshed.
+- The Power BI measures and date slicer should be configured appropriately to display the latest available observation after refresh.
+
+The dashboard provides a visual interface for monitoring the results of the Python workflow and exploring changes in US–EUR yield differentials over time.
+
+
 ## Summary
 
 This project provides a reproducible Python workflow for comparing US Treasury and euro-area AAA yields, calculating 2Y and 10Y yield differentials, measuring their weekly changes, and generating simple EUR/USD signals.
